@@ -229,6 +229,7 @@ services:
 " > docker-laravel/docker-compose.yml
 echo "✅  Etapa concluída!"
 
+
 # Colocar de forma mais permanente
 echo "🚀  Inicializando aplicações..."
 cd docker-laravel/ && docker-compose --env-file .env up -d

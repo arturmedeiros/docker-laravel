@@ -172,17 +172,17 @@ services:
       - sail
 
   # Nginx
-  proxy:
-    image: nginx:1.25
-    container_name: proxy
-    ports:
-      - "${APP_PORT-9000}:80"
-    volumes:
-      - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
-    depends_on:
-      - backend
-    networks:
-      - sail
+  #proxy:
+  #  image: nginx:1.25
+  #  container_name: proxy
+  #  ports:
+  #    - "${APP_PORT-9000}:80"
+  #  volumes:
+  #    - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+  #  depends_on:
+  #    - backend
+  #  networks:
+  #    - sail
 
   # DB MySQL
   database:

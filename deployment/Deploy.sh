@@ -106,8 +106,8 @@ echo "✅  Etapa concluída!"
 # Cria o .env do projeto Laravel
 echo "🔥  Configurando projeto..."
 
-if [ -f "laravel-vault/.env" ]; then
-    rm -R laravel-vault/.env
+if [ -f "docker-laravel/.env" ]; then
+    rm -R docker-laravel/.env
 fi
 
 # Adiciona variáveis no novo arquivo .env.example
@@ -126,14 +126,14 @@ WWWUSER=1000
 WWWGROUP=1000
 VITE_PORT=
 TZ=${CACHE_DRIVER-'America/Sao_Paulo'}
-" >> laravel-vault/.env
+" >> docker-laravel/.env
 
 # Copia a base padrão do .env do Laravel
-cp laravel-vault/.env laravel-vault/backend/.env
+cp docker-laravel/.env docker-laravel/backend/.env
 
 # Cria Docker Compose Padrão
-if [ -f "laravel-vault/docker-compose.yaml" ]; then
-    rm -R laravel-vault/docker-compose.yaml
+if [ -f "docker-laravel/docker-compose.yaml" ]; then
+    rm -R docker-laravel/docker-compose.yaml
 fi
 
 echo "# docker-compose.yml
@@ -226,12 +226,12 @@ services:
     container_name: cache
     networks:
       - sail
-" > laravel-vault/docker-compose.yml
+" > docker-laravel/docker-compose.yml
 echo "✅  Etapa concluída!"
 
 # Colocar de forma mais permanente
 echo "🚀  Inicializando aplicações..."
-cd laravel-vault/ && docker-compose --env-file .env up -d
+cd docker-laravel/ && docker-compose --env-file .env up -d
 docker exec backend sh -c "composer install && php artisan key:generate --force && php artisan jwt:secret && php artisan migrate --seed --force && php artisan storage:link"
 echo "✅  Etapa concluída!"
 
